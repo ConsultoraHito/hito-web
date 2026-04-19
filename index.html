@@ -1,0 +1,555 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="HITO — Consultoría de sostenibilidad y ESG para empresas en Argentina.">
+<title>HITO — Consultoría de Sostenibilidad y ESG</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+:root {
+  --slate:   #747989;
+  --lime:    #BAD688;
+  --lime-dk: #8aac52;
+  --dark:    #1a1c22;
+  --dark2:   #22242c;
+  --bg:      #f7f6f3;
+  --bg2:     #eeebe5;
+  --text:    #2a2c35;
+  --muted:   #747989;
+  --fd: 'Cormorant Garamond', Georgia, serif;
+  --fb: 'DM Sans', sans-serif;
+}
+html { scroll-behavior: smooth; }
+body { font-family: var(--fb); background: var(--bg); color: var(--text); line-height: 1.7; -webkit-font-smoothing: antialiased; overflow-x: hidden; }
+#nav { position: fixed; top: 0; left: 0; right: 0; z-index: 200; display: flex; align-items: center; justify-content: space-between; padding: 0 5vw; height: 70px; background: rgba(26,28,34,0.97); box-shadow: 0 1px 24px rgba(0,0,0,0.25); }
+.nav-logo { text-decoration: none; display: flex; align-items: center; height: 48px; }
+.nav-logo img { height: 44px; width: auto; object-fit: contain; display: block; }
+.nav-links { display: flex; gap: 2.25rem; list-style: none; align-items: center; }
+.nav-links a { text-decoration: none; font-size: 0.72rem; font-weight: 400; letter-spacing: 0.14em; text-transform: uppercase; color: rgba(255,255,255,0.65); transition: color 0.2s; }
+.nav-links a:hover { color: #fff; }
+.nav-cta { color: #fff !important; border: 1px solid rgba(255,255,255,0.35); padding: 0.4rem 1.1rem; border-radius: 1px; }
+.nav-cta:hover { background: var(--lime-dk) !important; border-color: var(--lime-dk) !important; }
+.hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; background: none; border: none; padding: 4px; }
+.hamburger span { display: block; width: 22px; height: 1.5px; background: rgba(255,255,255,0.8); }
+.hero-zone { position: relative; background: linear-gradient(to bottom, #2a2e38 0%, #1a1c22 100%); overflow: hidden; }
+.orbit-ring { position: absolute; border-radius: 50%; top: 50vh; left: 88.5vw; transform: translate(-50%, -50%); pointer-events: none; z-index: 0; }
+.orbit-outer { width: 70vw; height: 70vw; border: 1px solid rgba(186,214,136,0.10); animation: spin1 120s linear infinite; }
+.orbit-mid   { width: 42vw; height: 42vw; border: 1px solid rgba(186,214,136,0.09); animation: spin2 90s linear infinite reverse; }
+.orbit-inner { width: 24vw; height: 24vw; border: 1px solid rgba(186,214,136,0.15); animation: spin3 60s linear infinite; }
+.orbit-outer::after, .orbit-mid::after, .orbit-inner::after { content: ''; position: absolute; top: 0; left: 50%; transform: translateX(-50%) translateY(-50%); border-radius: 50%; background: var(--lime); }
+.orbit-outer::after { width: 6px; height: 6px; opacity: 0.35; }
+.orbit-mid::after   { width: 5px; height: 5px; opacity: 0.40; }
+.orbit-inner::after { width: 4px; height: 4px; opacity: 0.50; }
+.hero-letter { position: absolute; top: 50vh; left: 88.5vw; transform: translate(-50%, -50%); font-family: var(--fd); font-size: 20vw; font-weight: 500; color: rgba(186,214,136,0.07); line-height: 1; user-select: none; pointer-events: none; z-index: 0; }
+@keyframes spin1 { to { transform: translate(-50%, -50%) rotate(360deg);  } }
+@keyframes spin2 { to { transform: translate(-50%, -50%) rotate(-360deg); } }
+@keyframes spin3 { to { transform: translate(-50%, -50%) rotate(360deg);  } }
+.hero { position: relative; height: 100vh; min-height: 600px; display: flex; align-items: center; z-index: 1; }
+.hero-content { position: relative; z-index: 1; padding: 0 5vw; max-width: 55vw; }
+.hero-eyebrow { display: flex; align-items: center; gap: 0.75rem; font-size: 0.7rem; font-weight: 500; letter-spacing: 0.22em; text-transform: uppercase; color: var(--lime); margin-bottom: 2rem; }
+.hero-eyebrow::after { content: ''; display: block; width: 36px; height: 1px; background: var(--lime); }
+.hero h1 { font-family: var(--fd); font-size: clamp(2.2rem, 3.4vw, 4rem); font-weight: 500; line-height: 1.15; color: #fff; margin-bottom: 2rem; }
+.hero h1 em { font-style: italic; color: var(--lime); }
+.hero-sub { font-size: 1rem; font-weight: 300; color: rgba(255,255,255,0.55); max-width: 420px; margin-bottom: 3rem; line-height: 1.9; }
+.hero-btns { display: flex; gap: 1rem; flex-wrap: wrap; }
+.btn-light { display: inline-block; background: #fff; color: var(--dark); text-decoration: none; font-size: 0.75rem; font-weight: 500; letter-spacing: 0.12em; text-transform: uppercase; padding: 0.85rem 2rem; border-radius: 1px; transition: background 0.2s, color 0.2s; }
+.btn-light:hover { background: var(--lime); color: var(--dark); }
+.btn-ghost { display: inline-flex; align-items: center; gap: 0.5rem; text-decoration: none; font-size: 0.75rem; font-weight: 500; letter-spacing: 0.12em; text-transform: uppercase; color: rgba(255,255,255,0.55); padding: 0.85rem 0; border-bottom: 1px solid transparent; transition: color 0.2s, border-color 0.2s; }
+.btn-ghost:hover { color: #fff; border-color: rgba(255,255,255,0.4); }
+
+.about-strip { position: relative; z-index: 1; padding: 5.5rem 5vw 7rem; display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: center; }
+.about-strip h2 { font-family: var(--fd); font-size: clamp(2rem, 3vw, 2.8rem); font-weight: 500; color: #fff; line-height: 1.25; }
+.about-strip h2 .accent { color: var(--lime); }
+.about-strip p { font-size: 0.92rem; font-weight: 300; color: rgba(255,255,255,0.45); line-height: 1.95; }
+.about-strip p + p { margin-top: 1rem; }
+.btn-outline-lime { display: inline-block; margin-top: 2rem; text-decoration: none; font-size: 0.72rem; font-weight: 500; letter-spacing: 0.14em; text-transform: uppercase; color: var(--lime); border-bottom: 1px solid rgba(186,214,136,0.3); padding-bottom: 3px; transition: border-color 0.2s; }
+.btn-outline-lime:hover { border-color: var(--lime); }
+.img-sep { display: grid; grid-template-columns: repeat(4,1fr); height: 50vh; min-height: 280px; overflow: hidden; }
+.img-sep-cell { position: relative; overflow: hidden; display: flex; align-items: center; justify-content: center; }
+.img-sep-cell::after { content: attr(data-label); position: absolute; bottom: 1rem; left: 1.25rem; font-size: 0.78rem; font-weight: 500; letter-spacing: 0.14em; text-transform: uppercase; color: rgba(255,255,255,0.92); text-shadow: 0 1px 8px rgba(0,0,0,0.6); }
+.cell-1 { background: linear-gradient(rgba(20,28,18,0.22), rgba(20,28,18,0.22)), url('agro.jpeg') center/cover no-repeat; }
+.cell-2 { background: linear-gradient(rgba(20,14,10,0.18), rgba(20,14,10,0.18)), url('petrolera.jpeg') center/cover no-repeat; }
+.cell-3 { background: linear-gradient(rgba(16,20,28,0.22), rgba(16,20,28,0.22)), url('industria.jpeg') center/cover no-repeat; }
+.cell-4 { background: linear-gradient(rgba(18,20,26,0.20), rgba(18,20,26,0.20)), url('automotriz.jpeg') center/cover no-repeat; }
+.cell-glyph { font-family: var(--fd); font-size: clamp(2.5rem, 5vw, 5rem); font-weight: 500; color: rgba(255,255,255,0.75); user-select: none; pointer-events: none; transition: color 0.4s; text-shadow: 0 2px 12px rgba(0,0,0,0.4); }
+.img-sep-cell:hover .cell-glyph { color: rgba(255,255,255,0.95); }
+.servicios { padding: 7rem 5vw; background: var(--bg); }
+.sec-label { display: flex; align-items: center; gap: 0.75rem; font-size: 0.7rem; font-weight: 500; letter-spacing: 0.2em; text-transform: uppercase; color: var(--lime-dk); margin-bottom: 0.9rem; }
+.sec-label::before { content: ''; display: block; width: 24px; height: 1px; background: var(--lime-dk); }
+.sec-label.on-dark { color: var(--lime); }
+.sec-label.on-dark::before { background: var(--lime); }
+.sec-title { font-family: var(--fd); font-size: clamp(2rem, 3.5vw, 3.2rem); font-weight: 500; color: var(--dark); line-height: 1.18; margin-bottom: 0.75rem; }
+.sec-title.on-dark { color: #fff; }
+.sec-sub { font-size: 0.92rem; font-weight: 300; color: var(--muted); max-width: 600px; line-height: 1.85; margin-bottom: 3.5rem; }
+.sv-grid { display: grid; grid-template-columns: repeat(2,1fr); gap: 1px; background: rgba(116,121,137,0.14); border: 1px solid rgba(116,121,137,0.14); }
+.sv-card { background: var(--bg); padding: 2.75rem; transition: background 0.2s; cursor: default; }
+.sv-card:hover { background: var(--bg2); }
+.sv-card.sv-wide { background: var(--dark) !important; }
+.sv-card.sv-wide:hover { background: var(--dark2) !important; }
+.sv-card.sv-wide h3 { color: #fff; }
+.sv-card.sv-wide p { color: rgba(255,255,255,0.45); }
+.sv-card.sv-wide .sv-num { color: rgba(186,214,136,0.12); }
+.sv-card.sv-wide .sv-tag { color: var(--lime); border-bottom-color: rgba(186,214,136,0.4); }
+.sv-num { font-family: var(--fd); font-size: 3rem; font-weight: 400; color: rgba(116,121,137,0.12); line-height: 1; margin-bottom: 1.2rem; }
+.sv-card h3 { font-family: var(--fd); font-size: 1.35rem; font-weight: 500; color: var(--dark); line-height: 1.28; margin-bottom: 0.85rem; }
+.sv-card p { font-size: 0.87rem; font-weight: 300; color: var(--muted); line-height: 1.85; }
+.sv-tag { display: inline-block; margin-top: 1.5rem; font-size: 0.65rem; font-weight: 500; letter-spacing: 0.16em; text-transform: uppercase; color: var(--lime-dk); border-bottom: 1px solid rgba(138,172,82,0.4); padding-bottom: 2px; }
+.proceso { background: var(--bg2); padding: 7rem 5vw; }
+.proceso-intro { max-width: 640px; margin-bottom: 3.5rem; }
+.proceso-intro p { font-size: 0.92rem; font-weight: 300; color: var(--muted); line-height: 1.9; margin-top: 0.75rem; }
+.proceso-track { display: grid; grid-template-columns: repeat(5,1fr); gap: 0; position: relative; }
+.proceso-track::before { content: ''; position: absolute; top: 1.35rem; left: calc(10% + 1rem); right: calc(10% + 1rem); height: 1px; background: rgba(116,121,137,0.18); z-index: 0; }
+.step { position: relative; z-index: 1; display: flex; flex-direction: column; align-items: center; text-align: center; padding: 0 0.75rem; }
+.step-dot { width: 2.7rem; height: 2.7rem; border-radius: 50%; border: 1px solid rgba(116,121,137,0.22); background: var(--bg2); display: flex; align-items: center; justify-content: center; font-family: var(--fd); font-size: 1rem; font-weight: 500; color: var(--lime-dk); margin-bottom: 1rem; transition: background 0.2s, border-color 0.2s; }
+.step:hover .step-dot { background: var(--dark); border-color: var(--lime); color: var(--lime); }
+.step h4 { font-size: 0.78rem; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; color: var(--dark); margin-bottom: 0.45rem; }
+.step p { font-size: 0.8rem; font-weight: 300; color: var(--muted); line-height: 1.7; }
+.filosofia { background: var(--dark); padding: 7rem 5vw; }
+.fil-grid { display: grid; grid-template-columns: repeat(2,1fr); gap: 3rem 5rem; margin-top: 3.5rem; }
+.fil-item { display: flex; gap: 1.5rem; align-items: flex-start; }
+.fil-dash { width: 24px; height: 1px; background: var(--lime); margin-top: 0.7rem; flex-shrink: 0; }
+.fil-item h4 { font-size: 0.82rem; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase; color: #fff; margin-bottom: 0.5rem; }
+.fil-item p { font-size: 0.88rem; font-weight: 300; color: rgba(255,255,255,0.42); line-height: 1.85; }
+.newsletter { background: var(--bg2); padding: 5rem 5vw; display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: center; }
+.newsletter h2 { font-family: var(--fd); font-size: clamp(1.8rem, 3vw, 2.6rem); font-weight: 500; color: var(--dark); line-height: 1.2; margin-bottom: 1rem; }
+.newsletter p { font-size: 0.9rem; font-weight: 300; color: var(--muted); line-height: 1.85; }
+.nl-form { display: flex; gap: 0; width: 100%; }
+.nl-form input { flex: 1; font-family: var(--fb); font-size: 0.88rem; font-weight: 300; background: var(--bg); border: 1px solid rgba(116,121,137,0.25); border-right: none; border-radius: 1px 0 0 1px; padding: 0.75rem 1rem; color: var(--text); outline: none; transition: border-color 0.2s; height: 48px; }
+.nl-form input:focus { border-color: var(--slate); }
+.nl-form input::placeholder { color: rgba(116,121,137,0.5); }
+.nl-form button { background: var(--dark); color: #fff; border: none; cursor: pointer; font-family: var(--fb); font-size: 0.72rem; font-weight: 500; letter-spacing: 0.12em; text-transform: uppercase; padding: 0 1.5rem; border-radius: 0 1px 1px 0; white-space: nowrap; transition: background 0.2s; height: 48px; }
+.nl-form button:hover { background: var(--lime-dk); }
+.nl-disclaimer { font-size: 0.72rem; color: var(--muted); margin-top: 0.75rem; font-weight: 300; }
+.contacto { background: var(--dark2); padding: 7rem 5vw; display: grid; grid-template-columns: 1fr 1fr; gap: 6rem; align-items: start; }
+.contacto-desc { font-size: 0.92rem; font-weight: 300; color: rgba(255,255,255,0.42); line-height: 1.9; margin-bottom: 2.5rem; }
+.contact-list { display: flex; flex-direction: column; gap: 1rem; }
+.contact-list a { display: flex; align-items: center; gap: 0.9rem; text-decoration: none; font-size: 0.85rem; color: rgba(255,255,255,0.45); transition: color 0.2s; }
+.contact-list a:hover { color: #fff; }
+.c-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--lime); flex-shrink: 0; }
+form { display: flex; flex-direction: column; gap: 1.1rem; }
+.fg { display: flex; flex-direction: column; gap: 0.35rem; }
+.fg label { font-size: 0.68rem; font-weight: 500; letter-spacing: 0.14em; text-transform: uppercase; color: rgba(255,255,255,0.32); }
+.fg input, .fg textarea, .fg select { font-family: var(--fb); font-size: 0.88rem; font-weight: 300; background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.09); border-radius: 1px; padding: 0.75rem 1rem; color: rgba(255,255,255,0.82); outline: none; transition: border-color 0.2s, background 0.2s; resize: none; height: 48px; }
+.fg textarea { height: auto; }
+.fg input::placeholder, .fg textarea::placeholder { color: rgba(255,255,255,0.18); }
+.fg select option { background: var(--dark2); color: #fff; }
+.fg input:focus, .fg textarea:focus, .fg select:focus { border-color: rgba(186,214,136,0.4); background: rgba(255,255,255,0.06); }
+.fg-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+.btn-form { align-self: flex-start; background: var(--lime-dk); color: #fff; border: none; cursor: pointer; font-family: var(--fb); font-size: 0.72rem; font-weight: 500; letter-spacing: 0.14em; text-transform: uppercase; padding: 0.9rem 2rem; border-radius: 1px; transition: background 0.2s; }
+.btn-form:hover { background: var(--slate); }
+footer { background: #13151a; padding: 3.5rem 5vw; display: grid; grid-template-columns: 1.4fr 1fr 1fr 1fr; gap: 3rem; align-items: start; }
+.footer-logo img { height: 36px; width: auto; object-fit: contain; margin-bottom: 0.75rem; display: block; }
+.footer-brand p { font-size: 0.78rem; font-weight: 300; color: rgba(255,255,255,0.22); line-height: 1.7; max-width: 200px; }
+.footer-col h5 { font-size: 0.65rem; font-weight: 500; letter-spacing: 0.18em; text-transform: uppercase; color: rgba(255,255,255,0.28); margin-bottom: 1rem; }
+.footer-col a { display: block; text-decoration: none; font-size: 0.8rem; font-weight: 300; color: rgba(255,255,255,0.38); margin-bottom: 0.6rem; transition: color 0.2s; }
+.footer-col a:hover { color: rgba(255,255,255,0.75); }
+.footer-bottom { background: #13151a; border-top: 1px solid rgba(255,255,255,0.05); padding: 1.25rem 5vw; display: flex; justify-content: space-between; align-items: center; font-size: 0.7rem; font-weight: 300; color: rgba(255,255,255,0.18); }
+@media (max-width: 900px) {
+  .nav-links { display: none; flex-direction: column; position: absolute; top: 70px; left: 0; right: 0; background: rgba(26,28,34,0.98); padding: 1.5rem 5vw; gap: 1.25rem; border-top: 1px solid rgba(255,255,255,0.06); }
+  .nav-links.open { display: flex; }
+  .hamburger { display: flex; }
+  .hero-letter { display: none; }
+  .hero-content { max-width: 100%; }
+  .about-strip { grid-template-columns: 1fr; gap: 2.5rem; }
+  .img-sep { grid-template-columns: repeat(2,1fr); height: auto; }
+  .img-sep-cell { height: 25vh; min-height: 150px; }
+  .sv-grid { grid-template-columns: 1fr; }
+  .fil-grid { grid-template-columns: 1fr; gap: 2rem; }
+  .proceso-track { grid-template-columns: 1fr; gap: 2rem; }
+  .proceso-track::before { display: none; }
+  .step { flex-direction: row; align-items: flex-start; text-align: left; gap: 1.25rem; padding: 0; }
+  .step-dot { flex-shrink: 0; }
+  .newsletter { grid-template-columns: 1fr; gap: 2.5rem; }
+  .contacto { grid-template-columns: 1fr; gap: 3.5rem; }
+  .fg-row { grid-template-columns: 1fr; }
+  footer { grid-template-columns: 1fr 1fr; gap: 2rem; }
+}
+@media (max-width: 560px) {
+  .img-sep { grid-template-columns: 1fr; }
+  footer { grid-template-columns: 1fr; }
+  .footer-bottom { flex-direction: column; gap: 0.35rem; text-align: center; }
+}
+
+/* SCROLL REVEAL */
+.reveal { opacity: 0; transform: translateY(24px); transition: opacity 0.75s cubic-bezier(0.16,1,0.3,1), transform 0.75s cubic-bezier(0.16,1,0.3,1); }
+.reveal.visible { opacity: 1; transform: none; }
+.rd1 { transition-delay: 0.1s; }
+.rd2 { transition-delay: 0.2s; }
+.rd3 { transition-delay: 0.3s; }
+.rd4 { transition-delay: 0.4s; }
+.rd5 { transition-delay: 0.5s; }
+
+/* MODAL CONFIRMACIÓN */
+.modal-overlay {
+  display: none; position: fixed; inset: 0; z-index: 500;
+  background: rgba(14,16,20,0.75);
+  backdrop-filter: blur(4px);
+  align-items: center; justify-content: center;
+}
+.modal-overlay.active { display: flex; }
+.modal-box {
+  background: var(--dark2); border: 1px solid rgba(186,214,136,0.2);
+  border-radius: 2px; padding: 3rem; max-width: 440px; width: 90%;
+  text-align: center;
+  animation: modalIn 0.35s cubic-bezier(0.16,1,0.3,1);
+}
+@keyframes modalIn {
+  from { opacity: 0; transform: translateY(16px) scale(0.97); }
+  to   { opacity: 1; transform: none; }
+}
+.modal-icon {
+  width: 48px; height: 48px; border-radius: 50%;
+  border: 1px solid rgba(186,214,136,0.35);
+  display: flex; align-items: center; justify-content: center;
+  margin: 0 auto 1.5rem;
+  font-size: 1.25rem; color: var(--lime);
+}
+.modal-box h3 {
+  font-family: var(--fd); font-size: 1.6rem; font-weight: 500;
+  color: #fff; margin-bottom: 0.75rem; line-height: 1.2;
+}
+.modal-box p {
+  font-size: 0.85rem; font-weight: 300;
+  color: rgba(255,255,255,0.45); line-height: 1.8; margin-bottom: 2rem;
+}
+.modal-close {
+  background: transparent; border: 1px solid rgba(186,214,136,0.3);
+  color: var(--lime); font-family: var(--fb); font-size: 0.7rem;
+  font-weight: 500; letter-spacing: 0.14em; text-transform: uppercase;
+  padding: 0.7rem 1.75rem; border-radius: 1px; cursor: pointer;
+  transition: background 0.2s, border-color 0.2s;
+}
+.modal-close:hover { background: rgba(186,214,136,0.1); border-color: var(--lime); }
+
+/* ERROR INLINE FORM */
+.form-error {
+  display: none;
+  background: rgba(220,53,53,0.08);
+  border: 1px solid rgba(220,53,53,0.25);
+  border-radius: 1px;
+  padding: 0.85rem 1.1rem;
+  font-size: 0.82rem;
+  font-weight: 300;
+  color: rgba(255,100,100,0.85);
+  line-height: 1.6;
+}
+.form-error.visible { display: block; }
+</style>
+</head>
+<body>
+
+<nav id="nav">
+  <a href="#inicio" class="nav-logo" aria-label="HITO inicio">
+    <img src="logo.png" alt="HITO Consultoría">
+  </a>
+  <button class="hamburger" id="hbg" aria-label="Menú" aria-expanded="false">
+    <span></span><span></span><span></span>
+  </button>
+  <ul class="nav-links" id="nav-links" role="list">
+    <li><a href="#servicios">Servicios</a></li>
+    <li><a href="#proceso">Proceso</a></li>
+    <li><a href="#filosofia">Filosofía</a></li>
+    <li><a href="#newsletter">Newsletter</a></li>
+    <li><a href="#contacto" class="nav-cta">Contacto</a></li>
+  </ul>
+</nav>
+
+<div class="hero-zone" id="inicio">
+  <div class="orbit-ring orbit-outer" aria-hidden="true"></div>
+  <div class="orbit-ring orbit-mid"   aria-hidden="true"></div>
+  <div class="orbit-ring orbit-inner" aria-hidden="true"></div>
+  <div class="hero-letter"            aria-hidden="true">H</div>
+
+  <section class="hero">
+    <div class="hero-content">
+      <p class="hero-eyebrow">Consultoría ESG · Argentina</p>
+      <h1>Sostenibilidad que tiene<br><em>sentido</em> para el negocio.</h1>
+      <p class="hero-sub">Desarrollamos estrategias ESG a medida.<br>Rigor técnico, visión de negocio, resultados concretos.</p>
+      <div class="hero-btns">
+        <a href="#contacto" class="btn-light">Hablemos</a>
+        <a href="#servicios" class="btn-ghost">Ver servicios →</a>
+      </div>
+    </div>
+  </section>
+
+  <div class="about-strip">
+    <h2 class="reveal">Tres miradas.<br><span class="accent">Una sola dirección.</span></h2>
+    <div>
+      <p class="reveal rd1">HITO es una consultora fundada por tres profesionales con recorridos distintos y complementarios: gestión pública, industria privada y consultoría estratégica. Eso no es un dato de color — es la razón por la que nuestras soluciones funcionan en la práctica.</p>
+      <p>Primero entendemos tu negocio. Después construimos. Nunca al revés.</p>
+      <a href="#filosofia" class="btn-outline-lime">Cómo trabajamos →</a>
+    </div>
+  </div>
+</div>
+
+<div class="img-sep reveal" aria-hidden="true">
+  <div class="img-sep-cell cell-1" data-label="Agro"><span class="cell-glyph">E</span></div>
+  <div class="img-sep-cell cell-2" data-label="Energía"><span class="cell-glyph">S</span></div>
+  <div class="img-sep-cell cell-3" data-label="Industria"><span class="cell-glyph">G</span></div>
+  <div class="img-sep-cell cell-4" data-label="Automotriz"><span class="cell-glyph">✦</span></div>
+</div>
+
+<section class="servicios" id="servicios">
+  <p class="sec-label reveal">Nuestros servicios</p>
+  <h2 class="sec-title reveal rd1">Empezamos por lo central.<br>Llegamos hasta donde haga falta.</h2>
+  <p class="sec-sub reveal rd2">Tenemos servicios estructurados porque sabemos qué funciona. Pero el punto de partida siempre es la necesidad real de tu empresa, no un catálogo.</p>
+  <div class="sv-grid">
+    <div class="sv-card reveal">
+      <div class="sv-num">01</div>
+      <h3>Diagnóstico y Hoja de Ruta ESG</h3>
+      <p>Analizamos el punto de partida de la organización, identificamos brechas, oportunidades y prioridades, y construimos una hoja de ruta realista para integrar criterios ESG de forma ordenada y accionable. Sin planes teóricos: foco en pasos concretos, viables y adaptados al negocio.</p>
+      <span class="sv-tag">Punto de partida estratégico</span>
+    </div>
+    <div class="sv-card reveal rd1">
+      <div class="sv-num">02</div>
+      <h3>Matriz de Permisos EHS</h3>
+      <p>Ayudamos a identificar, ordenar y dar seguimiento a obligaciones, requisitos regulatorios, exigencias de clientes o estándares de mercado vinculados a sostenibilidad. Traducimos complejidad normativa en acciones claras y gestionables.</p>
+      <span class="sv-tag">Compliance · Mercado · Regulación</span>
+    </div>
+    <div class="sv-card reveal rd2">
+      <div class="sv-num">03</div>
+      <h3>Capacitación y Sensibilización</h3>
+      <p>Diseñamos formaciones prácticas para equipos que necesitan entender, aplicar o incorporar criterios ESG en su trabajo diario. Sin teoría innecesaria: contenidos útiles, aterrizados y adaptados a cada organización.</p>
+      <span class="sv-tag">In-house · Workshops · Formación</span>
+    </div>
+    <div class="sv-card sv-wide reveal rd3">
+      <div class="sv-num">04</div>
+      <h3>Laboratorio de Soluciones</h3>
+      <p>Espacio de innovación para necesidades que no encajan en los servicios estándar. Cuando el problema requiere una respuesta nueva, la construimos desde cero. Cada proyecto empieza con una pregunta genuina y termina con una solución implementable.</p>
+      <span class="sv-tag">Innovación aplicada</span>
+    </div>
+  </div>
+</section>
+
+<section class="proceso" id="proceso">
+  <p class="sec-label reveal">Metodología</p>
+  <h2 class="sec-title reveal rd1">Un enfoque claro, práctico<br>y adaptado a cada organización.</h2>
+  <div class="proceso-intro reveal rd2">
+    <p>Cada proyecto se construye desde la escucha, el análisis y la implementación real. Sin fórmulas genéricas: trabajamos sobre lo que cada negocio necesita para avanzar de forma ordenada y sostenible.</p>
+  </div>
+  <div class="proceso-track">
+    <div class="step reveal "><div class="step-dot">1</div><div><h4>Escucha y Contexto</h4><p>Entendemos el negocio, su realidad y sus desafíos antes de proponer soluciones.</p></div></div>
+    <div class="step reveal rd1"><div class="step-dot">2</div><div><h4>Diagnóstico</h4><p>Analizamos el punto de partida e identificamos prioridades, riesgos y oportunidades.</p></div></div>
+    <div class="step reveal rd2"><div class="step-dot">3</div><div><h4>Plan de Acción</h4><p>Diseñamos una hoja de ruta clara, realista y alineada con los objetivos de la organización.</p></div></div>
+    <div class="step reveal rd3"><div class="step-dot">4</div><div><h4>Implementación</h4><p>Acompañamos la puesta en marcha con herramientas prácticas y seguimiento continuo.</p></div></div>
+    <div class="step reveal rd4"><div class="step-dot">5</div><div><h4>Optimización</h4><p>Medimos avances, ajustamos el enfoque y evolucionamos la estrategia según resultados.</p></div></div>
+  </div>
+</section>
+
+<section class="filosofia" id="filosofia">
+  <p class="sec-label on-dark reveal">Filosofía</p>
+  <h2 class="sec-title on-dark reveal rd1">Cómo entendemos<br>la sostenibilidad.</h2>
+  <div class="fil-grid">
+    <div class="fil-item reveal"><div class="fil-dash"></div><div><h4>Negocio antes que discurso</h4><p>La sostenibilidad solo funciona cuando tiene sentido para el negocio. Antes de proponer, entendemos la operación, el contexto y lo que realmente es viable implementar.</p></div></div>
+    <div class="fil-item reveal rd1"><div class="fil-dash"></div><div><h4>Práctica antes que teoría</h4><p>No creemos en estrategias que quedan bien en una presentación pero no sobreviven el día a día. Priorizamos soluciones claras, útiles y aplicables.</p></div></div>
+    <div class="fil-item reveal rd2"><div class="fil-dash"></div><div><h4>Criterio antes que tendencia</h4><p>No todo lo que está de moda aporta valor. Nuestro enfoque parte de identificar qué importa, qué aplica y qué merece atención real en cada caso.</p></div></div>
+    <div class="fil-item reveal rd3"><div class="fil-dash"></div><div><h4>Impacto antes que cumplimiento</h4><p>Medir, reportar y cumplir importa. Pero el objetivo final no es llenar un informe: es generar mejoras concretas que puedan sostenerse en el tiempo.</p></div></div>
+  </div>
+</section>
+
+<section class="newsletter" id="newsletter">
+  <div>
+    <p class="sec-label reveal">Newsletter</p>
+    <h2 class="reveal rd1">Lo que importa en sostenibilidad.</h2>
+    <p>Una lectura clara sobre regulación, tendencias y sostenibilidad empresarial para quienes necesitan entender más allá del titular.</p>
+  </div>
+  <div>
+    <form class="nl-form reveal rd2" action="https://formspree.io/f/XXXXXXXX" method="POST" novalidate>
+      <input type="hidden" name="_subject" value="Suscripción newsletter HITO">
+      <input type="email" name="email" placeholder="tu@empresa.com" autocomplete="email" required>
+      <button type="submit">Suscribirme</button>
+    </form>
+    <p class="nl-disclaimer">Podés darte de baja en cualquier momento.</p>
+  </div>
+</section>
+
+<section class="contacto" id="contacto">
+  <div>
+    <p class="sec-label on-dark reveal">Contacto</p>
+    <h2 class="sec-title on-dark reveal rd1">El primer paso<br>es una conversación.</h2>
+    <p class="contacto-desc reveal rd2">Sin propuestas genéricas ni diagnósticos previos. Contanos el contexto de tu empresa y evaluamos juntos si tiene sentido trabajar.</p>
+    <nav class="contact-list reveal rd3" aria-label="Datos de contacto">
+      <a href="#" id="mail-contact"><span class="c-dot"></span><span id="mail-contact-txt"></span></a>
+      <a href="https://www.linkedin.com/company/hito-consultora-ambiental/" target="_blank" rel="noopener noreferrer"><span class="c-dot"></span>LinkedIn</a>
+      <a href="https://maps.google.com/?q=Buenos+Aires,+Argentina" target="_blank" rel="noopener noreferrer"><span class="c-dot"></span>Buenos Aires, Argentina</a>
+    </nav>
+  </div>
+  <form id="contact-form" action="https://api.web3forms.com/submit" method="POST" novalidate class="reveal rd2">
+    <input type="hidden" name="access_key" value="73a33d3a-731a-4118-b45d-b11cfca51b18">
+    <input type="hidden" name="subject" id="form-subject" value="">
+    <input type="hidden" name="from_name" value="HITO Web">
+    <div class="fg-row">
+      <div class="fg"><label for="nombre">Nombre</label><input type="text" id="nombre" name="nombre" autocomplete="name" required placeholder="Tu nombre"></div>
+      <div class="fg"><label for="empresa">Empresa</label><input type="text" id="empresa" name="empresa" autocomplete="organization" placeholder="Tu empresa"></div>
+    </div>
+    <div class="fg"><label for="email">Email</label><input type="email" id="email" name="email" autocomplete="email" required placeholder="correo@empresa.com"></div>
+    <div class="fg">
+      <label for="servicio">Servicio de interés</label>
+      <select id="servicio" name="servicio">
+        <option value="">Seleccioná una opción</option>
+        <option value="diagnostico">Diagnóstico y Hoja de Ruta ESG</option>
+        <option value="cumplimiento">Matriz de Permisos EHS</option>
+        <option value="capacitacion">Capacitación y Sensibilización</option>
+        <option value="laboratorio">Laboratorio de Soluciones</option>
+        <option value="general">Consulta general</option>
+      </select>
+    </div>
+    <div class="fg"><label for="mensaje">Mensaje</label><textarea id="mensaje" name="mensaje" rows="4" required placeholder="Contanos el contexto de tu empresa…"></textarea></div>
+    <div class="form-error" id="form-error">Hubo un problema al enviar tu mensaje. Por favor intentá de nuevo en unos minutos. Si el problema persiste, escribinos directamente a <span id="err-mail"></span></div>
+    <button type="submit" class="btn-form">Enviar mensaje</button>
+  </form>
+</section>
+
+<footer>
+  <div class="footer-brand">
+    <div class="footer-logo"><img src="logo.png" alt="HITO Consultoría"></div>
+    <p>Consultoría de sostenibilidad y ESG.<br>Buenos Aires, Argentina.</p>
+  </div>
+  <div class="footer-col">
+    <h5>Servicios</h5>
+    <a href="#servicios">Diagnóstico y Hoja de Ruta</a>
+    <a href="#servicios">Matriz de Permisos EHS</a>
+    <a href="#servicios">Capacitación y Sensibilización</a>
+    <a href="#servicios">Laboratorio de Soluciones</a>
+  </div>
+  <div class="footer-col">
+    <h5>Empresa</h5>
+    <a href="#filosofia">Filosofía</a>
+    <a href="#proceso">Proceso</a>
+    <a href="#newsletter">Newsletter</a>
+    <a href="#contacto">Contacto</a>
+  </div>
+  <div class="footer-col">
+    <h5>Contacto</h5>
+    <a href="#" id="mail-footer"><span id="mail-footer-txt"></span></a>
+    <a href="https://www.linkedin.com/company/hito-consultora-ambiental/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+  </div>
+</footer>
+<div class="footer-bottom">
+  <span>© 2025 HITO Consultoría · Todos los derechos reservados.</span>
+  <span>consultorahito.ar</span>
+</div>
+
+
+<!-- MODAL CONFIRMACIÓN ENVÍO -->
+<div class="modal-overlay" id="modal-ok" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+  <div class="modal-box">
+    <div class="modal-icon">✓</div>
+    <h3 id="modal-title">Mensaje enviado.</h3>
+    <p>Gracias por escribirnos. Revisaremos tu consulta y nos pondremos en contacto a la brevedad.</p>
+    <button class="modal-close" id="modal-close-btn">Cerrar</button>
+  </div>
+</div>
+
+<script>
+  var hbg = document.getElementById('hbg');
+  var nl  = document.getElementById('nav-links');
+  hbg.addEventListener('click', function() {
+    var open = nl.classList.toggle('open');
+    hbg.setAttribute('aria-expanded', String(open));
+  });
+  nl.querySelectorAll('a').forEach(function(a) {
+    a.addEventListener('click', function() {
+      nl.classList.remove('open');
+      hbg.setAttribute('aria-expanded', 'false');
+    });
+  });
+  (function() {
+    var u = 'consultora' + '.' + 'hito';
+    var d = 'gmail' + '.' + 'com';
+    var e = u + '@' + d;
+    var mc = document.getElementById('mail-contact');
+    var mf = document.getElementById('mail-footer');
+    var mct = document.getElementById('mail-contact-txt');
+    var mft = document.getElementById('mail-footer-txt');
+    if (mc)  mc.href = 'mai' + 'lto:' + e;
+    if (mct) mct.textContent = e;
+    if (mf)  mf.href = 'mai' + 'lto:' + e;
+    if (mft) mft.textContent = e;
+  })();
+
+  /* Scroll reveal */
+  var revealEls = document.querySelectorAll('.reveal');
+  var revealObserver = new IntersectionObserver(function(entries) {
+    entries.forEach(function(entry) {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+        revealObserver.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.1 });
+  revealEls.forEach(function(el) { revealObserver.observe(el); });
+
+  /* Asunto dinámico: [Servicio] - [Nombre Apellido] */
+  var contactForm = document.getElementById('contact-form');
+  var formSubject = document.getElementById('form-subject');
+  var modalOverlay = document.getElementById('modal-ok');
+  var modalCloseBtn = document.getElementById('modal-close-btn');
+
+  /* Armar asunto al cambiar nombre o servicio */
+  function updateSubject() {
+    var nombre = (document.getElementById('nombre').value || '').trim();
+    var servicioEl = document.getElementById('servicio');
+    var servicioText = servicioEl.options[servicioEl.selectedIndex].text;
+    var servicio = servicioEl.value ? servicioText : 'Consulta general';
+    formSubject.value = servicio + (nombre ? ' — ' + nombre : '');
+  }
+  document.getElementById('nombre').addEventListener('input', updateSubject);
+  document.getElementById('servicio').addEventListener('change', updateSubject);
+
+  /* Submit via fetch — modal en éxito, error inline en fallo */
+  var formError = document.getElementById('form-error');
+  var errMail   = document.getElementById('err-mail');
+  (function() {
+    var u = 'consultora' + '.' + 'hito';
+    var d = 'gmail' + '.' + 'com';
+    if (errMail) errMail.textContent = u + '@' + d;
+  })();
+
+  contactForm.addEventListener('submit', function(e) {
+    e.preventDefault();
+    updateSubject();
+    formError.classList.remove('visible');
+    var submitBtn = contactForm.querySelector('.btn-form');
+    submitBtn.disabled = true;
+    submitBtn.textContent = 'Enviando…';
+    var data = new FormData(contactForm);
+    fetch(contactForm.action, {
+      method: 'POST',
+      body: data,
+      headers: { 'Accept': 'application/json' }
+    }).then(function(res) {
+      if (res.ok) {
+        contactForm.reset();
+        formSubject.value = '';
+        modalOverlay.classList.add('active');
+      } else {
+        formError.classList.add('visible');
+      }
+      submitBtn.disabled = false;
+      submitBtn.textContent = 'Enviar mensaje';
+    }).catch(function() {
+      formError.classList.add('visible');
+      submitBtn.disabled = false;
+      submitBtn.textContent = 'Enviar mensaje';
+    });
+  });
+
+  /* Cerrar modal */
+  function closeModal() { modalOverlay.classList.remove('active'); }
+  modalCloseBtn.addEventListener('click', closeModal);
+  modalOverlay.addEventListener('click', function(e) {
+    if (e.target === modalOverlay) closeModal();
+  });
+  document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape') closeModal();
+  });
+
+</script>
+
+</body>
+</html>
