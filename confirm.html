@@ -68,7 +68,7 @@ if (!token) {
     .then(function(r) { return r.json(); })
     .then(function(data) {
       if (data.success) {
-        box.innerHTML = '<div class="icon">✓</div><h3>Suscripción confirmada.</h3><p>Ya sos parte del newsletter de HITO. Recibirás novedades sobre regulación, tendencias y sostenibilidad empresarial en Argentina.</p><a href="index.html" class="btn">Volver al inicio</a>';
+        box.innerHTML = '<div class="icon">✓</div><h3>Suscripción confirmada.</h3><p>Ya sos parte del newsletter de HITO. Recibirás novedades sobre regulación, tendencias y sostenibilidad empresarial.</p><a href="index.html" class="btn">Volver al inicio</a>';
       } else {
         box.innerHTML = '<div class="icon error">!</div><h3>' + (data.message || 'Algo salió mal.') + '</h3><p>Si el problema persiste, intentá suscribirte nuevamente desde la web.</p><a href="index.html" class="btn">Volver al inicio</a>';
       }
