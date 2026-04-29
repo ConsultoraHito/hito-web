@@ -238,6 +238,26 @@ footer { background: #13151a; padding: 3.5rem 5vw; display: grid; grid-template-
   line-height: 1.6;
 }
 .form-error.visible { display: block; }
+
+/* MODAL NEWSLETTER */
+.nl-modal-overlay {
+  display: none; position: fixed; inset: 0; z-index: 500;
+  background: rgba(14,16,20,0.78);
+  backdrop-filter: blur(4px);
+  align-items: center; justify-content: center;
+}
+.nl-modal-overlay.active { display: flex; }
+.nl-modal-box {
+  background: var(--dark2); border: 1px solid rgba(186,214,136,0.2);
+  border-radius: 2px; padding: 3rem; max-width: 440px; width: 90%;
+  text-align: center;
+  animation: modalIn 0.35s cubic-bezier(0.16,1,0.3,1);
+}
+.nl-modal-box .modal-icon { width: 48px; height: 48px; border-radius: 50%; border: 1px solid rgba(186,214,136,0.35); display: flex; align-items: center; justify-content: center; margin: 0 auto 1.5rem; font-size: 1.25rem; color: var(--lime); }
+.nl-modal-box h3 { font-family: var(--fd); font-size: 1.5rem; font-weight: 500; color: #fff; margin-bottom: 0.75rem; line-height: 1.2; }
+.nl-modal-box p { font-size: 0.85rem; font-weight: 300; color: rgba(255,255,255,0.45); line-height: 1.8; margin-bottom: 2rem; }
+.nl-modal-box .modal-close { background: transparent; border: 1px solid rgba(186,214,136,0.3); color: var(--lime); font-family: var(--fb); font-size: 0.7rem; font-weight: 500; letter-spacing: 0.14em; text-transform: uppercase; padding: 0.7rem 1.75rem; border-radius: 1px; cursor: pointer; transition: background 0.2s, border-color 0.2s; }
+.nl-modal-box .modal-close:hover { background: rgba(186,214,136,0.1); border-color: var(--lime); }
 </style>
 </head>
 <body>
@@ -435,6 +455,17 @@ footer { background: #13151a; padding: 3.5rem 5vw; display: grid; grid-template-
 </div>
 
 
+
+<!-- MODAL NEWSLETTER -->
+<div class="nl-modal-overlay" id="nl-modal">
+  <div class="nl-modal-box">
+    <div class="modal-icon">✉</div>
+    <h3>Revisá tu casilla.</h3>
+    <p>Te enviamos un mail de confirmación. Hacé clic en el enlace para finalizar tu suscripción al newsletter de HITO.</p>
+    <button class="modal-close" id="nl-modal-close">Entendido</button>
+  </div>
+</div>
+
 <!-- MODAL CONFIRMACIÓN ENVÍO -->
 <div class="modal-overlay" id="modal-ok" role="dialog" aria-modal="true" aria-labelledby="modal-title">
   <div class="modal-box">
@@ -548,6 +579,41 @@ footer { background: #13151a; padding: 3.5rem 5vw; display: grid; grid-template-
   document.addEventListener('keydown', function(e) {
     if (e.key === 'Escape') closeModal();
   });
+
+
+  /* ── Newsletter ── */
+  var NL_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbx15yfXwFBQdAUZsyd4I9Ielij-k4hy7mkjx9GXWmrao_UBY8AAxJts5IZ-eXOzLeVO4g/exec';
+
+  var nlForm    = document.getElementById('nl-form');
+  var nlEmail   = document.getElementById('nl-email');
+  var nlBtn     = document.getElementById('nl-btn');
+  var nlModal   = document.getElementById('nl-modal');
+  var nlClose   = document.getElementById('nl-modal-close');
+
+  nlForm.addEventListener('submit', function(e) {
+    e.preventDefault();
+    var email = nlEmail.value.trim();
+    if (!email) return;
+    nlBtn.disabled = true;
+    nlBtn.textContent = 'Enviando…';
+    fetch(NL_SCRIPT_URL + '?action=subscribe&email=' + encodeURIComponent(email))
+      .then(function(r) { return r.json(); })
+      .then(function(data) {
+        nlBtn.disabled = false;
+        nlBtn.textContent = 'Suscribirme';
+        nlEmail.value = '';
+        nlModal.classList.add('active');
+      })
+      .catch(function() {
+        nlBtn.disabled = false;
+        nlBtn.textContent = 'Suscribirme';
+        nlModal.classList.add('active');
+      });
+  });
+
+  function closeNlModal() { nlModal.classList.remove('active'); }
+  nlClose.addEventListener('click', closeNlModal);
+  nlModal.addEventListener('click', function(e) { if (e.target === nlModal) closeNlModal(); });
 
 </script>
 
