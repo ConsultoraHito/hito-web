@@ -378,10 +378,9 @@ footer { background: #13151a; padding: 3.5rem 5vw; display: grid; grid-template-
     <p>Una lectura clara sobre regulación, tendencias y sostenibilidad empresarial para quienes necesitan entender más allá del titular.</p>
   </div>
   <div>
-    <form class="nl-form reveal rd2" action="https://formspree.io/f/XXXXXXXX" method="POST" novalidate>
-      <input type="hidden" name="_subject" value="Suscripción newsletter HITO">
-      <input type="email" name="email" placeholder="tu@empresa.com" autocomplete="email" required>
-      <button type="submit">Suscribirme</button>
+    <form class="nl-form reveal rd2" id="nl-form" novalidate>
+      <input type="email" id="nl-email" placeholder="tu@empresa.com" autocomplete="email" required>
+      <button type="submit" id="nl-btn">Suscribirme</button>
     </form>
     <p class="nl-disclaimer">Podés darte de baja en cualquier momento.</p>
   </div>
