@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>HITO — Darse de baja</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+:root {
+  --lime:    #BAD688;
+  --lime-dk: #8aac52;
+  --dark:    #1a1c22;
+  --dark2:   #22242c;
+  --fd: 'Cormorant Garamond', Georgia, serif;
+  --fb: 'DM Sans', sans-serif;
+}
+body { font-family: var(--fb); background: var(--dark); min-height: 100vh; display: flex; align-items: center; justify-content: center; -webkit-font-smoothing: antialiased; }
+.box {
+  background: var(--dark2); border: 1px solid rgba(186,214,136,0.2);
+  border-radius: 2px; padding: 3rem; max-width: 460px; width: 90%;
+  text-align: center; animation: fadeIn 0.4s cubic-bezier(0.16,1,0.3,1);
+}
+@keyframes fadeIn { from { opacity:0; transform:translateY(16px); } to { opacity:1; transform:none; } }
+.icon {
+  width: 52px; height: 52px; border-radius: 50%;
+  border: 1px solid rgba(186,214,136,0.35);
+  display: flex; align-items: center; justify-content: center;
+  margin: 0 auto 1.5rem; font-size: 1.4rem; color: var(--lime);
+}
+.icon.error { border-color: rgba(220,53,53,0.35); color: rgba(220,100,100,0.85); }
+h3 { font-family: var(--fd); font-size: 1.6rem; font-weight: 500; color: #fff; margin-bottom: 0.75rem; line-height: 1.2; }
+p { font-size: 0.85rem; font-weight: 300; color: rgba(255,255,255,0.45); line-height: 1.8; margin-bottom: 2rem; }
+.btn {
+  display: inline-block; text-decoration: none;
+  border: 1px solid rgba(186,214,136,0.3); color: var(--lime);
+  font-family: var(--fb); font-size: 0.7rem; font-weight: 500;
+  letter-spacing: 0.14em; text-transform: uppercase;
+  padding: 0.7rem 1.75rem; border-radius: 1px;
+  transition: background 0.2s, border-color 0.2s;
+}
+.btn:hover { background: rgba(186,214,136,0.1); border-color: var(--lime); }
+</style>
+</head>
+<body>
+<div class="box" id="box">
+  <p style="color:rgba(255,255,255,0.35);font-size:0.85rem;font-weight:300;">Procesando baja…</p>
+</div>
+
+<script>
+var APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbx15yfXwFBQdAUZsyd4I9Ielij-k4hy7mkjx9GXWmrao_UBY8AAxJts5IZ-eXOzLeVO4g/exec';
+
+function getParam(name) {
+  var url = new URL(window.location.href);
+  return url.searchParams.get(name);
+}
+
+var token = getParam('token');
+var box = document.getElementById('box');
+
+if (!token) {
+  box.innerHTML = '<div class="icon error">✕</div><h3>Enlace inválido.</h3><p>Este enlace de baja no es válido. Si querés darte de baja escribinos a <span id="unsub-mail"></span></p><a href="index.html" class="btn">Volver al inicio</a>';
+  var m = document.getElementById('unsub-mail');
+  if (m) m.textContent = 'consultora' + '.' + 'hito' + '@' + 'gmail' + '.' + 'com';
+} else {
+  fetch(APPS_SCRIPT_URL + '?action=unsubscribe&token=' + encodeURIComponent(token))
+    .then(function(r) { return r.json(); })
+    .then(function(data) {
+      if (data.success) {
+        box.innerHTML = '<div class="icon">✓</div><h3>Baja registrada.</h3><p>Tu dirección fue eliminada del newsletter de HITO. Lamentamos verte partir — si cambiás de opinión podés suscribirte nuevamente cuando quieras.</p><a href="index.html" class="btn">Volver al inicio</a>';
+      } else {
+        box.innerHTML = '<div class="icon error">!</div><h3>' + (data.message || 'Algo salió mal.') + '</h3><p>Si el problema persiste, escribinos directamente.</p><a href="index.html" class="btn">Volver al inicio</a>';
+      }
+    })
+    .catch(function() {
+      box.innerHTML = '<div class="icon error">!</div><h3>Error de conexión.</h3><p>No pudimos procesar tu baja. Revisá tu conexión e intentá de nuevo.</p><a href="index.html" class="btn">Volver al inicio</a>';
+    });
+}
+</script>
+</body>
+</html>
