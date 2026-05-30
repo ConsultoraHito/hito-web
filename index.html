@@ -139,8 +139,8 @@ form { display: flex; flex-direction: column; gap: 1.1rem; }
 .fg select option { background: var(--dark2); color: #fff; }
 .fg input:focus, .fg textarea:focus, .fg select:focus { border-color: rgba(186,214,136,0.4); background: rgba(255,255,255,0.06); }
 .fg-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
-.btn-form { align-self: flex-start; background: var(--lime-dk); color: #fff; border: none; cursor: pointer; font-family: var(--fb); font-size: 0.72rem; font-weight: 500; letter-spacing: 0.14em; text-transform: uppercase; padding: 0.9rem 2rem; border-radius: 1px; transition: background 0.2s; }
-.btn-form:hover { background: var(--slate); }
+.btn-form { align-self: flex-start; background: transparent; color: rgba(255,255,255,0.6); border: 1px solid rgba(255,255,255,0.18); cursor: pointer; font-family: var(--fb); font-size: 0.72rem; font-weight: 500; letter-spacing: 0.14em; text-transform: uppercase; padding: 0.9rem 2rem; border-radius: 1px; transition: background 0.2s, border-color 0.2s, color 0.2s; }
+.btn-form:hover { background: rgba(255,255,255,0.06); border-color: rgba(255,255,255,0.35); color: #fff; }
 footer { background: #13151a; padding: 3.5rem 5vw; display: grid; grid-template-columns: 1.4fr 1fr 1fr 1fr; gap: 3rem; align-items: start; }
 .footer-logo img { height: 36px; width: auto; object-fit: contain; margin-bottom: 0.75rem; display: block; }
 .footer-brand p { font-size: 0.78rem; font-weight: 300; color: rgba(255,255,255,0.22); line-height: 1.7; max-width: 200px; }
@@ -183,82 +183,127 @@ footer { background: #13151a; padding: 3.5rem 5vw; display: grid; grid-template-
 .rd4 { transition-delay: 0.4s; }
 .rd5 { transition-delay: 0.5s; }
 
-/* MODAL CONFIRMACIÓN */
-.modal-overlay {
-  display: none; position: fixed; inset: 0; z-index: 500;
-  background: rgba(14,16,20,0.75);
-  backdrop-filter: blur(4px);
-  align-items: center; justify-content: center;
-}
-.modal-overlay.active { display: flex; }
-.modal-box {
-  background: var(--dark2); border: 1px solid rgba(186,214,136,0.2);
-  border-radius: 2px; padding: 3rem; max-width: 440px; width: 90%;
-  text-align: center;
-  animation: modalIn 0.35s cubic-bezier(0.16,1,0.3,1);
-}
-@keyframes modalIn {
-  from { opacity: 0; transform: translateY(16px) scale(0.97); }
-  to   { opacity: 1; transform: none; }
-}
-.modal-icon {
-  width: 48px; height: 48px; border-radius: 50%;
-  border: 1px solid rgba(186,214,136,0.35);
-  display: flex; align-items: center; justify-content: center;
-  margin: 0 auto 1.5rem;
-  font-size: 1.25rem; color: var(--lime);
-}
-.modal-box h3 {
-  font-family: var(--fd); font-size: 1.6rem; font-weight: 500;
-  color: #fff; margin-bottom: 0.75rem; line-height: 1.2;
-}
-.modal-box p {
-  font-size: 0.85rem; font-weight: 300;
-  color: rgba(255,255,255,0.45); line-height: 1.8; margin-bottom: 2rem;
-}
-.modal-close {
-  background: transparent; border: 1px solid rgba(186,214,136,0.3);
-  color: var(--lime); font-family: var(--fb); font-size: 0.7rem;
-  font-weight: 500; letter-spacing: 0.14em; text-transform: uppercase;
-  padding: 0.7rem 1.75rem; border-radius: 1px; cursor: pointer;
-  transition: background 0.2s, border-color 0.2s;
-}
-.modal-close:hover { background: rgba(186,214,136,0.1); border-color: var(--lime); }
-
-/* ERROR INLINE FORM */
-.form-error {
-  display: none;
-  background: rgba(220,53,53,0.08);
-  border: 1px solid rgba(220,53,53,0.25);
-  border-radius: 1px;
-  padding: 0.85rem 1.1rem;
-  font-size: 0.82rem;
-  font-weight: 300;
-  color: rgba(255,100,100,0.85);
-  line-height: 1.6;
-}
-.form-error.visible { display: block; }
-
-/* MODAL NEWSLETTER */
-.nl-modal-overlay {
+/* MODAL SELECCIÓN CAL.COM */
+.cal-modal-overlay {
   display: none; position: fixed; inset: 0; z-index: 500;
   background: rgba(14,16,20,0.78);
   backdrop-filter: blur(4px);
   align-items: center; justify-content: center;
 }
-.nl-modal-overlay.active { display: flex; }
-.nl-modal-box {
+.cal-modal-overlay.active { display: flex; }
+.cal-modal-box {
   background: var(--dark2); border: 1px solid rgba(186,214,136,0.2);
-  border-radius: 2px; padding: 3rem; max-width: 440px; width: 90%;
+  border-radius: 2px; padding: 2.5rem; max-width: 400px; width: 90%;
   text-align: center;
   animation: modalIn 0.35s cubic-bezier(0.16,1,0.3,1);
 }
-.nl-modal-box .modal-icon { width: 48px; height: 48px; border-radius: 50%; border: 1px solid rgba(186,214,136,0.35); display: flex; align-items: center; justify-content: center; margin: 0 auto 1.5rem; font-size: 1.25rem; color: var(--lime); }
-.nl-modal-box h3 { font-family: var(--fd); font-size: 1.5rem; font-weight: 500; color: #fff; margin-bottom: 0.75rem; line-height: 1.2; }
-.nl-modal-box p { font-size: 0.85rem; font-weight: 300; color: rgba(255,255,255,0.45); line-height: 1.8; margin-bottom: 2rem; }
-.nl-modal-box .modal-close { background: transparent; border: 1px solid rgba(186,214,136,0.3); color: var(--lime); font-family: var(--fb); font-size: 0.7rem; font-weight: 500; letter-spacing: 0.14em; text-transform: uppercase; padding: 0.7rem 1.75rem; border-radius: 1px; cursor: pointer; transition: background 0.2s, border-color 0.2s; }
-.nl-modal-box .modal-close:hover { background: rgba(186,214,136,0.1); border-color: var(--lime); }
+.cal-modal-box h3 {
+  font-family: var(--fd); font-size: 1.5rem; font-weight: 500;
+  color: #fff; margin-bottom: 0.5rem; line-height: 1.2;
+}
+.cal-modal-box p {
+  font-size: 0.82rem; font-weight: 300;
+  color: rgba(255,255,255,0.42); line-height: 1.7; margin-bottom: 2rem;
+}
+.cal-options { display: flex; flex-direction: column; gap: 0.75rem; }
+.cal-option {
+  display: flex; align-items: center; justify-content: space-between;
+  background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.09);
+  border-radius: 2px; padding: 1rem 1.25rem; cursor: pointer;
+  transition: background 0.2s, border-color 0.2s; text-align: left;
+}
+.cal-option:hover { background: rgba(186,214,136,0.08); border-color: rgba(186,214,136,0.3); }
+.cal-option-title { font-size: 0.88rem; font-weight: 500; color: #fff; }
+.cal-option-sub { font-size: 0.75rem; font-weight: 300; color: rgba(255,255,255,0.4); margin-top: 0.2rem; }
+.cal-option-badge {
+  font-size: 0.65rem; font-weight: 500; letter-spacing: 0.12em;
+  text-transform: uppercase; color: var(--lime-dk);
+  border: 1px solid rgba(138,172,82,0.3); padding: 0.2rem 0.6rem; border-radius: 1px;
+  white-space: nowrap;
+}
+.cal-modal-cancel {
+  margin-top: 1.25rem; background: none; border: none; cursor: pointer;
+  font-family: var(--fb); font-size: 0.72rem; font-weight: 400;
+  letter-spacing: 0.1em; text-transform: uppercase;
+  color: rgba(255,255,255,0.28); transition: color 0.2s;
+}
+.cal-modal-cancel:hover { color: rgba(255,255,255,0.6); }
+
+.btn-agendar {
+  display: inline-flex; align-items: center; gap: 0.5rem;
+  background: var(--lime-dk); border: 2px solid var(--lime);
+  color: var(--dark); font-family: var(--fb); font-size: 0.72rem;
+  font-weight: 500; letter-spacing: 0.14em; text-transform: uppercase;
+  padding: 0.9rem 1.5rem; border-radius: 1px; cursor: pointer;
+  transition: background 0.2s, border-color 0.2s; white-space: nowrap;
+}
+.btn-agendar:hover { background: var(--lime); border-color: var(--lime); }
+.contacto-divider {
+  font-size: 0.68rem; font-weight: 300; color: rgba(255,255,255,0.22);
+  letter-spacing: 0.06em; font-style: italic;
+}
+.contacto-actions { display: flex; flex-direction: row; justify-content: space-between; align-items: center; width: 100%; margin-top: 0.25rem; gap: 1rem; }
 </style>
+<script>
+(function(C,A,L){let p=function(a,ar){a.q.push(ar)};let d=C.document;C.Cal=C.Cal||function(){let cal=C.Cal;let ar=arguments;if(!cal.loaded){cal.ns={};cal.q=cal.q||[];d.head.appendChild(d.createElement("script")).src=A;cal.loaded=true}if(ar[0]===L){const api=function(){p(api,arguments)};const namespace=ar[1];api.q=api.q||[];if(typeof namespace==="string"){cal.ns[namespace]=cal.ns[namespace]||api;p(cal.ns[namespace],ar);p(cal,["initNamespace",namespace])}else p(cal,ar);return}p(cal,ar)};"init"in C.Cal||C.Cal("init",{origin:"https://cal.com"});})(window,"https://cal.com/embed.js","init");
+
+  /* ── Cal.com ── */
+  Cal("init", "30min", {origin:"https://cal.com"});
+  Cal("init", "60min", {origin:"https://cal.com"});
+
+  Cal.ns["30min"]("inline", {
+    elementOrSelector: "#cal-inline-30",
+    calLink: "consultora-hito/30-min",
+    layout: "month_view"
+  });
+
+  Cal.ns["60min"]("inline", {
+    elementOrSelector: "#cal-inline-60",
+    calLink: "consultora-hito/60-min",
+    layout: "month_view"
+  });
+
+  Cal.ns["30min"]("ui", {
+    styles: { branding: { brandColor: "#8aac52" } },
+    hideEventTypeDetails: false,
+    layout: "month_view"
+  });
+
+  Cal.ns["60min"]("ui", {
+    styles: { branding: { brandColor: "#8aac52" } },
+    hideEventTypeDetails: false,
+    layout: "month_view"
+  });
+
+  function openCalModal() {
+    document.getElementById('cal-modal').classList.add('active');
+  }
+
+  function closeCalModal() {
+    document.getElementById('cal-modal').classList.remove('active');
+  }
+
+  function openCal(type) {
+    closeCalModal();
+    if (type === '30min') {
+      Cal.ns["30min"]("modal", {
+        calLink: "consultora-hito/30-min",
+        config: { layout: "month_view" }
+      });
+    } else {
+      Cal.ns["60min"]("modal", {
+        calLink: "consultora-hito/60-min",
+        config: { layout: "month_view" }
+      });
+    }
+  }
+
+  document.getElementById('cal-modal').addEventListener('click', function(e) {
+    if (e.target === document.getElementById('cal-modal')) closeCalModal();
+  });
+
+</script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css">
 </head>
 <body>
 
@@ -378,9 +423,10 @@ footer { background: #13151a; padding: 3.5rem 5vw; display: grid; grid-template-
     <p>Una lectura clara sobre regulación, tendencias y sostenibilidad empresarial para quienes necesitan entender más allá del titular.</p>
   </div>
   <div>
-    <form class="nl-form reveal rd2" id="nl-form" novalidate>
-      <input type="email" id="nl-email" placeholder="tu@empresa.com" autocomplete="email" required>
-      <button type="submit" id="nl-btn">Suscribirme</button>
+    <form class="nl-form reveal rd2" action="https://formspree.io/f/XXXXXXXX" method="POST" novalidate>
+      <input type="hidden" name="_subject" value="Suscripción newsletter HITO">
+      <input type="email" name="email" placeholder="tu@empresa.com" autocomplete="email" required>
+      <button type="submit">Suscribirme</button>
     </form>
     <p class="nl-disclaimer">Podés darte de baja en cualquier momento.</p>
   </div>
@@ -397,10 +443,8 @@ footer { background: #13151a; padding: 3.5rem 5vw; display: grid; grid-template-
       <a href="https://maps.google.com/?q=Buenos+Aires,+Argentina" target="_blank" rel="noopener noreferrer"><span class="c-dot"></span>Buenos Aires, Argentina</a>
     </nav>
   </div>
-  <form id="contact-form" action="https://api.web3forms.com/submit" method="POST" novalidate class="reveal rd2">
-    <input type="hidden" name="access_key" value="73a33d3a-731a-4118-b45d-b11cfca51b18">
-    <input type="hidden" name="subject" id="form-subject" value="">
-    <input type="hidden" name="from_name" value="HITO Web">
+  <form action="https://formspree.io/f/xrerkvdk" method="POST" novalidate class="reveal rd2">
+    <input type="hidden" name="_subject" value="Consulta desde consultorahito.ar">
     <div class="fg-row">
       <div class="fg"><label for="nombre">Nombre</label><input type="text" id="nombre" name="nombre" autocomplete="name" required placeholder="Tu nombre"></div>
       <div class="fg"><label for="empresa">Empresa</label><input type="text" id="empresa" name="empresa" autocomplete="organization" placeholder="Tu empresa"></div>
@@ -418,8 +462,11 @@ footer { background: #13151a; padding: 3.5rem 5vw; display: grid; grid-template-
       </select>
     </div>
     <div class="fg"><label for="mensaje">Mensaje</label><textarea id="mensaje" name="mensaje" rows="4" required placeholder="Contanos el contexto de tu empresa…"></textarea></div>
-    <div class="form-error" id="form-error">Hubo un problema al enviar tu mensaje. Por favor intentá de nuevo en unos minutos. Si el problema persiste, escribinos directamente a <span id="err-mail"></span></div>
-    <button type="submit" class="btn-form">Enviar mensaje</button>
+    <div class="contacto-actions">
+      <button type="submit" class="btn-form">Enviar mensaje</button>
+      <span class="contacto-divider">¿Preferís hablar antes?</span>
+      <button type="button" class="btn-agendar" onclick="openCalModal()"><i class="ti ti-calendar" style="font-size:14px;" aria-hidden="true"></i>Reservar un espacio</button>
+    </div>
   </form>
 </section>
 
@@ -451,28 +498,6 @@ footer { background: #13151a; padding: 3.5rem 5vw; display: grid; grid-template-
 <div class="footer-bottom">
   <span>© 2025 HITO Consultoría · Todos los derechos reservados.</span>
   <span>consultorahito.ar</span>
-</div>
-
-
-
-<!-- MODAL NEWSLETTER -->
-<div class="nl-modal-overlay" id="nl-modal">
-  <div class="nl-modal-box">
-    <div class="modal-icon">✉</div>
-    <h3>Revisá tu casilla.</h3>
-    <p>Te enviamos un mail de confirmación. Hacé clic en el enlace para finalizar tu suscripción al newsletter de HITO.</p>
-    <button class="modal-close" id="nl-modal-close">Entendido</button>
-  </div>
-</div>
-
-<!-- MODAL CONFIRMACIÓN ENVÍO -->
-<div class="modal-overlay" id="modal-ok" role="dialog" aria-modal="true" aria-labelledby="modal-title">
-  <div class="modal-box">
-    <div class="modal-icon">✓</div>
-    <h3 id="modal-title">Mensaje enviado.</h3>
-    <p>Gracias por escribirnos. Revisaremos tu consulta y nos pondremos en contacto a la brevedad.</p>
-    <button class="modal-close" id="modal-close-btn">Cerrar</button>
-  </div>
 </div>
 
 <script>
@@ -514,107 +539,87 @@ footer { background: #13151a; padding: 3.5rem 5vw; display: grid; grid-template-
   }, { threshold: 0.1 });
   revealEls.forEach(function(el) { revealObserver.observe(el); });
 
-  /* Asunto dinámico: [Servicio] - [Nombre Apellido] */
-  var contactForm = document.getElementById('contact-form');
-  var formSubject = document.getElementById('form-subject');
-  var modalOverlay = document.getElementById('modal-ok');
-  var modalCloseBtn = document.getElementById('modal-close-btn');
+  /* ── Cal.com ── */
+  Cal("init", "30min", {origin:"https://cal.com"});
+  Cal("init", "60min", {origin:"https://cal.com"});
 
-  /* Armar asunto al cambiar nombre o servicio */
-  function updateSubject() {
-    var nombre = (document.getElementById('nombre').value || '').trim();
-    var servicioEl = document.getElementById('servicio');
-    var servicioText = servicioEl.options[servicioEl.selectedIndex].text;
-    var servicio = servicioEl.value ? servicioText : 'Consulta general';
-    formSubject.value = servicio + (nombre ? ' — ' + nombre : '');
+  Cal.ns["30min"]("inline", {
+    elementOrSelector: "#cal-inline-30",
+    calLink: "consultora-hito/30-min",
+    layout: "month_view"
+  });
+
+  Cal.ns["60min"]("inline", {
+    elementOrSelector: "#cal-inline-60",
+    calLink: "consultora-hito/60-min",
+    layout: "month_view"
+  });
+
+  Cal.ns["30min"]("ui", {
+    styles: { branding: { brandColor: "#8aac52" } },
+    hideEventTypeDetails: false,
+    layout: "month_view"
+  });
+
+  Cal.ns["60min"]("ui", {
+    styles: { branding: { brandColor: "#8aac52" } },
+    hideEventTypeDetails: false,
+    layout: "month_view"
+  });
+
+  function openCalModal() {
+    document.getElementById('cal-modal').classList.add('active');
   }
-  document.getElementById('nombre').addEventListener('input', updateSubject);
-  document.getElementById('servicio').addEventListener('change', updateSubject);
 
-  /* Submit via fetch — modal en éxito, error inline en fallo */
-  var formError = document.getElementById('form-error');
-  var errMail   = document.getElementById('err-mail');
-  (function() {
-    var u = 'consultora' + '.' + 'hito';
-    var d = 'gmail' + '.' + 'com';
-    if (errMail) errMail.textContent = u + '@' + d;
-  })();
+  function closeCalModal() {
+    document.getElementById('cal-modal').classList.remove('active');
+  }
 
-  contactForm.addEventListener('submit', function(e) {
-    e.preventDefault();
-    updateSubject();
-    formError.classList.remove('visible');
-    var submitBtn = contactForm.querySelector('.btn-form');
-    submitBtn.disabled = true;
-    submitBtn.textContent = 'Enviando…';
-    var data = new FormData(contactForm);
-    fetch(contactForm.action, {
-      method: 'POST',
-      body: data,
-      headers: { 'Accept': 'application/json' }
-    }).then(function(res) {
-      if (res.ok) {
-        contactForm.reset();
-        formSubject.value = '';
-        modalOverlay.classList.add('active');
-      } else {
-        formError.classList.add('visible');
-      }
-      submitBtn.disabled = false;
-      submitBtn.textContent = 'Enviar mensaje';
-    }).catch(function() {
-      formError.classList.add('visible');
-      submitBtn.disabled = false;
-      submitBtn.textContent = 'Enviar mensaje';
-    });
-  });
-
-  /* Cerrar modal */
-  function closeModal() { modalOverlay.classList.remove('active'); }
-  modalCloseBtn.addEventListener('click', closeModal);
-  modalOverlay.addEventListener('click', function(e) {
-    if (e.target === modalOverlay) closeModal();
-  });
-  document.addEventListener('keydown', function(e) {
-    if (e.key === 'Escape') closeModal();
-  });
-
-
-  /* ── Newsletter ── */
-  var NL_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbx15yfXwFBQdAUZsyd4I9Ielij-k4hy7mkjx9GXWmrao_UBY8AAxJts5IZ-eXOzLeVO4g/exec';
-
-  var nlForm    = document.getElementById('nl-form');
-  var nlEmail   = document.getElementById('nl-email');
-  var nlBtn     = document.getElementById('nl-btn');
-  var nlModal   = document.getElementById('nl-modal');
-  var nlClose   = document.getElementById('nl-modal-close');
-
-  nlForm.addEventListener('submit', function(e) {
-    e.preventDefault();
-    var email = nlEmail.value.trim();
-    if (!email) return;
-    nlBtn.disabled = true;
-    nlBtn.textContent = 'Enviando…';
-    fetch(NL_SCRIPT_URL + '?action=subscribe&email=' + encodeURIComponent(email))
-      .then(function(r) { return r.json(); })
-      .then(function(data) {
-        nlBtn.disabled = false;
-        nlBtn.textContent = 'Suscribirme';
-        nlEmail.value = '';
-        nlModal.classList.add('active');
-      })
-      .catch(function() {
-        nlBtn.disabled = false;
-        nlBtn.textContent = 'Suscribirme';
-        nlModal.classList.add('active');
+  function openCal(type) {
+    closeCalModal();
+    if (type === '30min') {
+      Cal.ns["30min"]("modal", {
+        calLink: "consultora-hito/30-min",
+        config: { layout: "month_view" }
       });
-  });
+    } else {
+      Cal.ns["60min"]("modal", {
+        calLink: "consultora-hito/60-min",
+        config: { layout: "month_view" }
+      });
+    }
+  }
 
-  function closeNlModal() { nlModal.classList.remove('active'); }
-  nlClose.addEventListener('click', closeNlModal);
-  nlModal.addEventListener('click', function(e) { if (e.target === nlModal) closeNlModal(); });
+  document.getElementById('cal-modal').addEventListener('click', function(e) {
+    if (e.target === document.getElementById('cal-modal')) closeCalModal();
+  });
 
 </script>
+
+<!-- MODAL SELECCIÓN REUNIÓN CAL.COM -->
+<div class="cal-modal-overlay" id="cal-modal">
+  <div class="cal-modal-box">
+    <h3>¿Cuánto tiempo tenés?</h3>
+    <p>Elegí el tipo de reunión y te mostramos la disponibilidad.</p>
+    <div class="cal-options">
+      <div class="cal-option" onclick="openCal('30min')">
+        <div>
+          <div class="cal-option-title">Consulta inicial</div>
+          <div class="cal-option-sub">Primera conversación, sin compromiso</div>
+        </div>
+        <span class="cal-option-badge">30 min</span>
+      </div>
+      <div class="cal-option" onclick="openCal('60min')">
+        <div>
+          <div class="cal-option-title">Reunión de trabajo</div>
+          <div class="cal-option-sub">Análisis de situación y propuesta</div>
+        </div>
+        <span class="cal-option-badge">60 min</span>
+      </div>
+    </div>
+    <button class="cal-modal-cancel" onclick="closeCalModal()">Cancelar</button>
+  </div>
+</div>
 
 </body>
 </html>
