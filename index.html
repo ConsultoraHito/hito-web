@@ -168,6 +168,21 @@ footer { background: #13151a; padding: 3.5rem 5vw; display: grid; grid-template-
   .fg-row { grid-template-columns: 1fr; }
   footer { grid-template-columns: 1fr 1fr; gap: 2rem; }
 }
+
+@media (max-width: 560px) {
+  .contacto-actions { flex-direction: column; align-items: stretch; gap: 0.5rem; }
+  .contacto-actions .btn-form { width: 100%; text-align: center; }
+  .contacto-actions .btn-agendar { width: 100%; justify-content: center; }
+  .contacto-divider {
+    display: flex; align-items: center; gap: 0.5rem;
+    font-size: 9px; color: rgba(255,255,255,0.22); font-style: italic;
+  }
+  .contacto-divider::before,
+  .contacto-divider::after {
+    content: ''; flex: 1; height: 1px; background: rgba(255,255,255,0.08);
+  }
+}
+
 @media (max-width: 560px) {
   .img-sep { grid-template-columns: 1fr; }
   footer { grid-template-columns: 1fr; }
@@ -243,6 +258,12 @@ footer { background: #13151a; padding: 3.5rem 5vw; display: grid; grid-template-
   letter-spacing: 0.06em; font-style: italic;
 }
 .contacto-actions { display: flex; flex-direction: row; justify-content: space-between; align-items: center; width: 100%; margin-top: 0.25rem; gap: 1rem; }
+@media (max-width: 560px) {
+  .contacto-actions { flex-direction: column; align-items: stretch; gap: 0.5rem; }
+  .contacto-actions .contacto-divider { text-align: center; }
+  .contacto-actions .btn-agendar { justify-content: center; }
+  .contacto-actions .btn-form { align-self: stretch; text-align: center; }
+}
 </style>
 <script>
 (function(C,A,L){let p=function(a,ar){a.q.push(ar)};let d=C.document;C.Cal=C.Cal||function(){let cal=C.Cal;let ar=arguments;if(!cal.loaded){cal.ns={};cal.q=cal.q||[];d.head.appendChild(d.createElement("script")).src=A;cal.loaded=true}if(ar[0]===L){const api=function(){p(api,arguments)};const namespace=ar[1];api.q=api.q||[];if(typeof namespace==="string"){cal.ns[namespace]=cal.ns[namespace]||api;p(cal.ns[namespace],ar);p(cal,["initNamespace",namespace])}else p(cal,ar);return}p(cal,ar)};"init"in C.Cal||C.Cal("init",{origin:"https://cal.com"});})(window,"https://cal.com/embed.js","init");
